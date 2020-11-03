@@ -91,11 +91,9 @@ function applychange(){
   //ambient
   if (mood.value > 3.5){
     vol5.mute = false;
-    vol5.volume = (mood.value)
     vol6.mute = true;
   }else if (mood.value < -3.5){
     vol5.mute = true;
-    vol6.volume = (mood.value)
     vol6.mute = false;
   }else{
     vol5.mute = true;
