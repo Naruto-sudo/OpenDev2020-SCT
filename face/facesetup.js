@@ -8,7 +8,6 @@ window.onload=function onloadsetup(){
 
     var media = navigator.mediaDevices.getUserMedia({       // メディアデバイスを取得
         video: { facingMode: "user" },                          // カメラの映像を使う（スマホならインカメラ）
-
         audio: false                                          // マイクの音声は使わない
     });
     media.then((stream) => {                                // メディアデバイスが取得できたら
