@@ -15,10 +15,10 @@ for(var i = 1 ; i < musicnum ; i++ ){
 var music = [
   ['filename', 'track', 'emotion', 0], //ここは参照しない (musicを取得するときは1からしてね！！！)
   ['hp_piano', track[1], 'happy', 0],
-  ['hp_strings', track[2], 'happy', 0.2],
+  ['hp_strings', track[2], 'happy', 0.3],
   ['hp_forest', track[3], 'happy', 0.8],
-  ['sd_piano', track[4], 'sad', 0.1],
-  ['sd_strings', track[5], 'sad', 0.2],
+  ['sd_piano', track[4], 'sad', 0],
+  ['sd_strings', track[5], 'sad', 0.3],
   ['sd_rain', track[6], 'sad', 0.8]
 ];
 
@@ -70,7 +70,8 @@ function soundloop(emotype1, emovalue1, emotype2, emovalue2) {
         volume[4].mute = true;
         volume[5].mute = true;
         volume[6].mute = true;
-    }else if (emovalue1 > emovalue2) {
+    }
+    if (emovalue1 > emovalue2) {
         volume[1].mute = true;
         volume[2].mute = true;
         volume[3].mute = true;
