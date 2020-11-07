@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <title>The Mirror v2</title>
+</head>
+<body>
+
+    <input type="button" value="STARTMUSIC" onclick="startmusic()">
+    <input type="button" value="DEBUGMODE" onclick="debugmode()">
+
+    <script> //デバッグモード、表情認識のUIを表示/非表示に
+    var debug = true;
+    function debugmode(){
+        if (debug == false){
+            document.getElementById("container").style.visibility = "visible";
+            document.getElementById("dat").style.visibility = "visible";
+            debug = true;
+        }else {
+            document.getElementById("container").style.visibility = "hidden";
+            document.getElementById("dat").style.visibility = "hidden";
+            debug = false;
+        }
+    }
+    </script>
+
+    <div id="container">
+        <!-- video の上に canvas をオーバーレイするための div 要素 -->
+        <video id="video" width="480" height="270" autoplay></video>  <!-- カメラ映像を流す video -->
+        <canvas id="canvas" width="480" height="270"></canvas>        <!-- 重ねて描画する canvas -->
+    </div>
+
+    <!-- データ表示用 div 要素 -->
+    <div id="dat"></div>
+
+    <!-- clmtrackr 関連ファイルの読み込み -->
+    <script src="./face/facesetup.js"></script>
+    <script src="./face/clmtrackr.js"></script>          <!-- clmtrackr のメインライブラリの読み込み -->
+    <script src="./face/model_pca_20_svm_emotion.js"></script>   <!-- ★顔モデル（※1）の読み込み -->
+    <script src="./face/emotionClassifier.js"></script>  <!-- ★感情を分類する外部関数の読み込み -->
+    <script src="./face/emotionModel.js"></script>       <!-- ★感情モデル（※2）の読み込み -->
+    <!-- Tone.js 関連ファイルの読み込み -->
+    <script src="./music/Tone.js"></script>
+    <script src="./music/musicsetup.js"></script>
+</body>
+</html>
