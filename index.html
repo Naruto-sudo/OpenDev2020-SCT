@@ -1,28 +1,37 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" type="text/css" href="index.css">
-    <title>The Mirror v2</title>
+    <title>The Mirror v3</title>
 </head>
 <body>
+    <div id="buttons">
+        <input type="button" value="STARTMUSIC" onclick="startmusic()">
+        <input type="button" value="DEBUGMODE" onclick="debugmode()">
+        <input type="button" value="FORCEJUMP" onclick="forcejump()">
+    </div>
 
-    <input type="button" value="STARTMUSIC" onclick="startmusic()">
-    <input type="button" value="DEBUGMODE" onclick="debugmode()">
-
-    <script> //デバッグモード、表情認識のUIを表示/非表示に
+    <script>
     var debug = true;
+    //デバッグモード、表情認識のUIを表示/非表示に
     function debugmode(){
         if (debug == false){
             document.getElementById("container").style.visibility = "visible";
             document.getElementById("dat").style.visibility = "visible";
+            document.getElementById("head").style.visibility = "visible";
             debug = true;
         }else {
             document.getElementById("container").style.visibility = "hidden";
             document.getElementById("dat").style.visibility = "hidden";
+            document.getElementById("head").style.visibility = "hidden";
             debug = false;
         }
+    }
+    //強制的にidlerページに飛ぶ
+    function forcejump(){
+        location.href = "./idler.html";
     }
     </script>
 
@@ -34,6 +43,11 @@
 
     <!-- データ表示用 div 要素 -->
     <div id="dat"></div>
+    <!--距離表示用 div要素　あってもなくてもいい-->
+    <div id="head">VL53L0X<br>
+        Distance [mm]<br>
+        <div id="dist"></div>
+    </div>
 
     <!-- clmtrackr 関連ファイルの読み込み -->
     <script src="./face/facesetup.js"></script>
@@ -42,6 +56,7 @@
     <script src="./face/emotionClassifier.js"></script>  <!-- ★感情を分類する外部関数の読み込み -->
     <script src="./face/emotionModel.js"></script>       <!-- ★感情モデル（※2）の読み込み -->
     <!-- Tone.js 関連ファイルの読み込み -->
+    <!-- CHIRIMEN 関連ファイルの読み込み -->
     <script src="./music/Tone.js"></script>
     <script src="./music/musicsetup.js"></script>
 </body>
