@@ -1,3 +1,5 @@
+//var framerate = 30; // framerateの定義
+
 window.onload=function onloadsetup(){
 
     var video = document.getElementById("video");           // video 要素を取得
@@ -30,19 +32,21 @@ window.onload=function onloadsetup(){
     // 描画ループ
 
     function drawLoop() {
-        requestAnimationFrame(drawLoop);                      // drawLoop 関数を繰り返し実行
-        var positions = tracker.getCurrentPosition();         // 顔部品の現在位置の取得
+        //setTimeout(function(){                          // loopの頻度の低下
+            requestAnimationFrame(drawLoop);                 // drawLoop 関数を繰り返し実行
+            var positions = tracker.getCurrentPosition();         // 顔部品の現在位置の取得
 
-        var parameters = tracker.getCurrentParameters();      // ★現在の顔のパラメータを取得
+            var parameters = tracker.getCurrentParameters();      // ★現在の顔のパラメータを取得
 
-        var emotion = classifier.meanPredict(parameters);
-        // ★そのパラメータから感情を推定して emotion に結果を入れる
+            var emotion = classifier.meanPredict(parameters);
+            // ★そのパラメータから感情を推定して emotion に結果を入れる
 
-        showEmotionData(emotion);                             // ★感情データを表示
+            showEmotionData(emotion);                             // ★感情データを表示
 
-        context.clearRect(0, 0, canvas.width, canvas.height); // canvas をクリア
+            context.clearRect(0, 0, canvas.width, canvas.height); // canvas をクリア
 
-        tracker.draw(canvas);                                 // canvas にトラッキング結果を描画
+            tracker.draw(canvas);                                 // canvas にトラッキング結果を描画
+        //}, 1000 / framerate);                          // loopの頻度の低下
 
     }
     drawLoop();                                             // drawLoop 関数をトリガー
@@ -57,10 +61,9 @@ window.onload=function onloadsetup(){
 
             str += emo[i].emotion + ": "
                 // 感情名
-                + emo[i].value.toFixed(1) + "<br>";            // 感情の程度（小数第一位まで）
+                + emo[i].value.toFixed(3) + "<br>";            // 感情の程度（小数第一位まで）
 
-        soundloop(emo[0].emotion, emo[0].value.toFixed(1), emo[1].emotion, emo[1].value.toFixed(1));                                              // Tone.js 受け渡し用
-
+            soundloop(emo[0].value.toFixed(3), emo[1].value.toFixed(3));      //Tone.jsに送信
         }
 
         var dat = document.getElementById("dat");
